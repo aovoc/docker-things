@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libsnappy-dev \
         protobuf-compiler \
         vim \
+        ssh
         python3-dev \
         python3-pip \
         python3-setuptools && \
