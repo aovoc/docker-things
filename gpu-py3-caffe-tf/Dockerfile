@@ -46,7 +46,7 @@ RUN git clone -b ${CLONE_TAG} --depth 1 https://github.com/BVLC/caffe.git . && \
 # For libcudnn.so /usr/lib/x86_64-linux-gnu
 # for libcuda.so  /usr/local/cuda/lib64
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu:/usr/local/cuda/lib64
-RUN pip3 install --upgrade sklearn jupyter https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.4.0rc1-cp35-cp35m-linux_x86_64.whl && \
+RUN pip3 install --upgrade sklearn jupyter pyspark https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.4.0rc1-cp35-cp35m-linux_x86_64.whl && \
     echo "$LD_LIBRARY_PATH" >> /etc/ld.so.conf
 
 ENV PYCAFFE_ROOT $CAFFE_ROOT/python
