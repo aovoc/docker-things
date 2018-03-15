@@ -18,7 +18,7 @@ Caffe 1.0
 
 ### Command
 ```
-nvidia-docker build -t test .
-nvidia-docker run --name test -v /opt/workspace:/workspace -p 18888:8888 -td <IMAGE_ID>
-nvidia-docker exec -it <IMAGE_ID> /bin/bash
+nvidia-docker build -t <IMAGE_ID> .
+nvidia-docker run --name <CONTAINER_ID> -v /opt/workspace:/workspace -p 18888:8888 -td <IMAGE_ID>
+nvidia-docker exec -it <CONTAINER_ID> /bin/bash
 ```
