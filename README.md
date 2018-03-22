@@ -11,7 +11,7 @@ dfgfdsgdfsgsdfg
 ### gpu-py3-caffe
 Ref: https://github.com/BVLC/caffe/tree/master/docker
 ```
-CUDA 8
+CUDA 8sdfsdafsdaf
 cuDNN 6
 Caffe 1.0
 ```
