@@ -41,7 +41,7 @@ ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 RUN wget http://mirror.navercorp.com/apache/hadoop/common/hadoop-3.1.0/hadoop-3.1.0-src.tar.gz && \
        tar zxvf hadoop-3.1.0-src.tar.gz && \
        cd hadoop-3.1.0-src && \
-       mvn package -Pdist -Pdoc -Psrc -Dtar -DskipTests && \
-       cp hadoop-dist/target/hadoop-3.1.0.tar.gz /workspace/
+       mvn package -Pdist -Pdoc -Psrc -Dtar -DskipTests
+#       cp hadoop-dist/target/hadoop-3.1.0.tar.gz /workspace/
 
 WORKDIR /workspace
