@@ -1,19 +1,31 @@
 ## Dockerfiles
 
-### gpu-py3-caffe-tf
+### caffe-tf
 ```
 CUDA 8
 cuDNN 6
 Caffe 1.0
 TensorFlow r1.4
 ```
-dfgfdsgdfsgsdfg
-### gpu-py3-caffe
+### caffe
 Ref: https://github.com/BVLC/caffe/tree/master/docker
-```sadfsadfasdfsadfasdfsadf
-CUDA 8sdfsdafsdaf
+```
+CUDA 8
 cuDNN 6
 Caffe 1.0
+```
+### hadoop
+```
+hadoop 3.1.0
+protobuf 2.5.0
+```
+### spark
+```
+spark 2.2.1 with pre-built hadoop 2.7 and later 
+```
+### jenkins
+```
+jenkins latest LTS (https://hub.docker.com/r/jenkins/jenkins/)
 ```
 
 ### Command
