@@ -10,14 +10,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         software-properties-common \
         python3-dev \
         python3-pip \
-        python3-setuptools
+        python3-setuptools \
 
 # java install
 # oracle-java9-installer not work for pyspark
 RUN add-apt-repository ppa:webupd8team/java && apt-get update && \
     echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections && \
     apt-get install -y --no-install-recommends oracle-java8-installer && \
-    apt-get install -y --no-install-recommends oracle-java8-set-default
+    apt-get install -y --no-install-recommends oracle-java8-set-default && \
+    rm -rf /var/lib/apt/lists/*
 
 # spark install
 ENV SPARK_INSTALL_ROOT=/opt/spark
