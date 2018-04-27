@@ -45,4 +45,6 @@ CMD command arg1 arg2 ...
 
 #Require ENTRYPOINT to specify executable
 CMD ["arg1", "arg2"...]
+
+#Ref: https://docs.docker.com/engine/reference/builder/#copy
 ```
