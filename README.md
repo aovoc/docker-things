@@ -34,3 +34,15 @@ nvidia-docker build -t <IMAGE_ID> .
 nvidia-docker run --name <CONTAINER_ID> -v /opt/workspace:/workspace -p 18888:8888 -td <IMAGE_ID>
 nvidia-docker exec -it <CONTAINER_ID> /bin/bash
 ```
+
+### Dockerfile command
+#### CMD
+```
+# Can not use shell variables format. ex. $HOME
+CMD ["executable", "arg1", "arg2", ...]
+
+CMD command arg1 arg2 ...
+
+#Require ENTRYPOINT to specify executable
+CMD ["arg1", "arg2"...]
+```
