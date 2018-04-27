@@ -20,7 +20,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         software-properties-common \
         python3-dev \
         python3-pip \
-        python3-setuptools
+        python3-setuptools \
+    && rm -rf /var/lib/apt/lists/*    
 
 # protobuf. https://github.com/google/protobuf/tree/master/src
 # Use protobuf v2.50. Check 'hadoop-project/pom.xml'
@@ -37,6 +38,7 @@ RUN wget https://github.com/google/protobuf/releases/download/v2.5.0/protobuf-2.
         rm -rf protobuf-2.5.0
 
 ## Reference. http://wiki.lofarolabs.com/index.php/Compile_Hadoop_Source_Code
+# Remove hadoop.tar.gz file
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 RUN wget http://mirror.navercorp.com/apache/hadoop/common/hadoop-3.1.0/hadoop-3.1.0-src.tar.gz && \
        tar zxvf hadoop-3.1.0-src.tar.gz && \
