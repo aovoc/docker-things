@@ -23,6 +23,8 @@ ENV LANG C.UTF-8
 
 EXPOSE 5000
 
+# Below is far from above 'COPY ...' code !!
+# If Below code is right under the COPY ...'' code, It'l; show error (No such file ... )
 WORKDIR /service
 RUN pip3 install -r /service/requirements.txt
 
