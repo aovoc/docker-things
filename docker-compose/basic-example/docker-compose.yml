@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+    service-1:
+        build:
+          context: ./
+          dockerfile: Dockerfile
+        volumes:
+          - ./vol /vol
+        ports:
+          - 5000:5000
+    service-2:
+        build:
+          context: ./
+          dockerfile: Dockerfile
+        ports:
+          - 5001:5000
+        depends_on:
+          - service-1
