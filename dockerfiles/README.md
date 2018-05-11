@@ -14,15 +14,23 @@ CUDA 8
 cuDNN 6
 Caffe 1.0
 ```
+
 ### hadoop
 ```
 hadoop 3.1.0
 protobuf 2.5.0
 ```
+
 ### spark
 ```
 spark 2.2.1 with pre-built hadoop 2.7 and later 
 ```
+
+### all-spark-notebook
+```
+docker run -it --name all-spark -e NB_UID=1000 -e NB_GID=1000 --user root -e GRANT_SUDO=yes -v /data/docker_workplace:/home/jovyan/work --rm -p 8888:8888 jupyter/all-spark-notebook
+```
+
 ### jenkins
 ```
 jenkins latest LTS (https://hub.docker.com/r/jenkins/jenkins/)
