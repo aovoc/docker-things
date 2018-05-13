@@ -3,7 +3,7 @@
 version: '3'
 
 services:
-    service-1:
+    master:
         build:
           context: ./
           dockerfile: Dockerfile
@@ -12,7 +12,7 @@ services:
         networks:
           - localNet
 
-    service-2:
+    node1:
         build:
           context: ./
           dockerfile: Dockerfile
@@ -21,9 +21,9 @@ services:
         networks:
           - localNet
         depends_on:
-          - service-1
+          - master
 
-    service-3:
+    node2:
         build:
           context: ./
           dockerfile: Dockerfile
@@ -32,7 +32,7 @@ services:
         networks:
           - localNet
         depends_on:
-          - service-2
+          - node1
 
 networks:
     localNet:
