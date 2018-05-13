@@ -1,0 +1,38 @@
+# Reference 
+# https://docs.docker.com/compose/compose-file/#endpoint_mode# Reference: https://docs.docker.com/compose/compose-file/#endpoint_mode# Reference: https://docs.docker.com/compose/compose-file/#endpoint_mode
+version: '3'
+
+services:
+    service-1:
+        build:
+          context: ./
+          dockerfile: Dockerfile
+        ports:
+          - 5000:5000
+        networks:
+          - localNet
+
+    service-2:
+        build:
+          context: ./
+          dockerfile: Dockerfile
+        ports:
+          - 5001:5000
+        networks:
+          - localNet
+        depends_on:
+          - service-1
+
+    service-3:
+        build:
+          context: ./
+          dockerfile: Dockerfile
+        ports:
+          - 5002:5000
+        networks:
+          - localNet
+        depends_on:
+          - service-2
+
+networks:
+    localNet:
