@@ -2,12 +2,14 @@
 
 
 ### caffe-tf-spark-python3.6
-* Ubuntu 16.04
-* CUDA 9.0
-* cuDNN 7
-* Caffe 1.0
-* TensorFlow gpu 1.8
-* Spark 2.2.1 with hadoop2.7
+* System info
+  * Ubuntu 16.04
+  * CUDA 9.0
+  * cuDNN 7
+  * python 3.6.4
+  * Caffe 1.0
+  * TensorFlow gpu 1.8
+  * Spark 2.2.1 with hadoop 2.7
 * Build and Run
 ```
 $ cd main-server
