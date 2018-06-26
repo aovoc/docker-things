@@ -1,5 +1,12 @@
 # docker-things
 
+
+# Filter and grep docker container
+* Example
+```
+$ nvidia-docker ps --filter "status=exited" --filter "since=determined_chatterjee" | awk '{print $1}' | xargs --no-run-if-empty nvidia-docker rm
+```
+
 #### Docker Command Line
 ```
 # Inspect contatiner 
