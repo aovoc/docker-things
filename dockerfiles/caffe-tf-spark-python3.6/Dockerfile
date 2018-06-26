@@ -1,5 +1,5 @@
 FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
-LABEL maintainer seo@algorigo.com
+LABEL maintainer centrifugal4@gamil.com
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
@@ -45,13 +45,15 @@ RUN wget https://dl.bintray.com/boostorg/release/1.67.0/source/boost_1_67_0.tar.
     mkdir boost && tar zxf boost*.tar.gz -C boost --strip-components=1 && rm boost*.tar.gz && \
     cd boost && ./bootstrap.sh && mv ../project-config.jam . && ./b2 --prefix=/opt/boost install -j $(($(nproc) + 1)) && cd .. && rm -r boost
 
-# NCCL and caffe
+# NCCL and Caffe
 ENV CAFFE_ROOT=/opt/caffe
 WORKDIR $CAFFE_ROOT
-RUN git clone --depth 1 https://github.com/BVLC/caffe.git
-COPY Makefile.config Makefile.config
+# NCCL
 RUN git clone https://github.com/NVIDIA/nccl.git && \
-    cd nccl && make -j install && cd .. && rm -rf nccl
+    cd nccl && make -j $(($(nproc) + 1)) install && cd .. && rm -rf nccl
+# Caffe
+RUN git clone --depth 1 https://github.com/BVLC/caffe.git .
+COPY Makefile.config Makefile.config
 RUN make all -j $(($(nproc) + 1)) && make pycaffe -j $(($(nproc) + 1)) && make distribute -j $(($(nproc) + 1))
 ENV PYCAFFE_ROOT $CAFFE_ROOT/python
 ENV PYTHONPATH $PYCAFFE_ROOT:$PYTHONPATH
@@ -60,11 +62,9 @@ RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
 
 # java install
 # oracle-java9-installer not work for pyspark
-RUN add-apt-repository ppa:webupd8team/java && apt-get update && \
-    echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections && \
-    apt-get install -y --no-install-recommends oracle-java8-installer && \
-    apt-get install -y --no-install-recommends oracle-java8-set-default && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends software-properties-common apt-utils
+RUN add-apt-repository -y ppa:webupd8team/java && apt-get update && \
+    apt-get install -y openjdk-8-jdk && rm -rf /var/lib/apt/lists/*
 
 # spark install
 ENV SPARK_INSTALL_ROOT=/opt/spark
@@ -74,10 +74,7 @@ RUN wget http://mirror.navercorp.com/apache/spark/spark-2.2.1/spark-2.2.1-bin-ha
     tar xvf *.tgz && \
     rm -rf *.tgz && \
     find ./ -maxdepth 1 -name "spark*" -exec mv {} spark \; && \
-    rm -rf /var/lib/apt/lists/* && rm -rf /var/cache/oracle-jdk8-installer
-
-# pyspark install
-RUN pip3 install --upgrade pip && \
+    rm -rf /var/lib/apt/lists/* && rm -rf /var/cache/oracle-jdk8-installer && \
     pip3 install pyspark findspark
 
 # run jupyter server

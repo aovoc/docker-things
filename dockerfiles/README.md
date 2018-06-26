@@ -1,5 +1,24 @@
 ## Dockerfiles
 
+
+### caffe-tf-spark-python3.6
+* Ubuntu 16.04
+* CUDA 9.0
+* cuDNN 7
+* Caffe 1.0
+* TensorFlow gpu 1.8
+* Spark 2.2.1 with hadoop2.7
+* Build and Run
+```
+$ cd main-server
+$ nvidia-docker build -t main:1.0 .
+$ nvidia-docker run --name main-c -v /opt/workspace:/workspace -p 8888-9999:8888-9999 -td main:1.0
+```
+* Base image
+```
+$ nvidia-docker pull nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
+```
+
 ### caffe-tf
 ```
 CUDA 8
