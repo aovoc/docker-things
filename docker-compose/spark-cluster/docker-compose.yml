@@ -1,0 +1,58 @@
+# Reference 
+# https://docs.docker.com/compose/compose-file/#endpoint_mode# Reference: https://docs.docker.com/compose/compose-file/#endpoint_mode# Reference: https://docs.docker.com/compose/compose-file/#endpoint_mode
+version: '3'
+
+services:
+    spark-master:
+        build:
+          context: ./
+          dockerfile: Dockerfile
+        ports:
+          - "18086:8080"
+          - "17077:7077"
+        networks:
+          - localNet
+        volumes:
+          - /data/docker_workplace:/workspace
+        container_name: spark-master
+        stdin_open: true  # -i
+        tty: true  # -t
+
+    spark-worker-1:
+        build:
+          context: ./
+          dockerfile: Dockerfile
+        ports:
+          - "18087:8081"
+        networks:
+          - localNet
+        volumes:
+          - /data/docker_workplace:/workspace
+        container_name: spark-worker-1
+        environment:
+          - "SPARK_MASTER=spark://spark-master:7077"
+        stdin_open: true
+        tty: true
+        depends_on:
+          - spark-master
+
+    spark-worker-2:
+        build:
+          context: ./
+          dockerfile: Dockerfile
+        ports:
+          - "18088:8081"
+        networks:
+          - localNet
+        volumes:
+          - /data/docker_workplace:/workspace
+        container_name: spark-worker-2
+        environment:
+          - "SPARK_MASTER=spark://spark-master:7077"
+        stdin_open: true
+        tty: true
+        depends_on:
+          - spark-master
+
+networks:
+    localNet:
